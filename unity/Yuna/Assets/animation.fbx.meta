@@ -1369,7 +1369,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Yuna_Body_Defaultskin.001
-    second: {instanceID: 0}
+    second: {fileID: 2100000, guid: 8a3cb28bb4024eb4f8063dc40b250867, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yuna_Eyebrow002_Eyebrow002.001
+    second: {fileID: 2100000, guid: 8211009e8465b0e43b5ab34f4f0fcf16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yuna_Eyelashes02_Bodymaterial.001
+    second: {fileID: 2100000, guid: ab78daed2ebc127479a2d218dd4583a5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -1378,8 +1388,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Yuna_Jammers3_Jammers3material.001
+    second: {fileID: 2100000, guid: 1316ca18e52a11f47897a684f04c4a3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Yuna_Ponytail01_Ponytail01.001
     second: {fileID: 2100000, guid: 2176ff1fe9f037846aa9a8637ca47b18, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yuna_Sport_bra01_Sport_bra01.001
+    second: {fileID: 2100000, guid: 9c69a09cfb2942e4c877d43c3583ff88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yuna_Teeth_base_Teethmaterial.001
+    second: {fileID: 2100000, guid: a9e7b85e258c7f94885ecdb96e4ba3c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yuna_Tennisshoes_Tennisshoes.001
+    second: {fileID: 2100000, guid: 7484845fca0029e46881a44cf5047cde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yuna_Tongue01_Tongue01material.001
+    second: {fileID: 2100000, guid: eddeea0c57df5704cb6dbb339d7070c8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -1406,7 +1441,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Yuna|walk cycle
+      takeName: Yuna|walk cycle
+      firstFrame: 0
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
