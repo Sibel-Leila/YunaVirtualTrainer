@@ -212,22 +212,6 @@ Pentru a se determina cat de bine pacientul exerseaza si cum evolueaza, antrenoa
 %%  Analiza cerintelor
 %%
 
-\chapter{Analiza Cerințelor / Motivație}
-\todo[inline, color=red!40]{ Acest capitol va analiza cerințele produsului din prisma potențialilor clienți și a scenariilor de utilizare preconizate, urmând a fi generată o lista de funcționalități. 
-
-Dacă proiectul de licență face parte dintr-un proiect mai amplu (de exemplu un proiect complex, la care lucrează 2 studenți (ex: 1 student la front-end-ul aplicației, 1 student la back-end-ul aplicației), în acest capitol va fi explicat pe scurt ansamblul proiectului și ce parte din proiect este adresată de lucrarea propusă. 
-
-Criterii pentru calificativul \textit{Ne\textit{Satisfăcător}}: 
-Cerințele sunt imaginate de student pe baza unei analize a pieței;
-
-Criterii pentru calificativul \textit{Satisfăcător}: 
-Există un interviu, un client, analiza cerințelor este elaborată pe baza interviului;
-
-Criterii pentru calificativul \textit{Bine}: 
- Proces iterativ pe baza unor interviuri cu mai mulți clienți, dezvoltare MVP, reevaluare cerințe;
-}
-
-
 %%
 %%  Studiu de piata
 %%
@@ -354,9 +338,12 @@ Aceasta aplicatie a fost creata de Ubisoft numai pentru Xbox One si a fost lansa
 %%
 \chapter{Detalii de implementare}
 
-\section{Crarea avatarului - MakeHuman}
+%%
+%%  Crearea avatarului - MakeHuman
+%%
+\section{Crearea avatarului - MakeHuman}
 
-Creatrea caracterului Yunei a fost creat cu ajutorul software-ului open source de creare a humanoizilor tridimensionali, MakeHuman versiunea 1.1.1.
+Creatrea caracterului Yunei a fost realizat cu ajutorul software-ului open source de creare a humanoizilor tridimensionali, MakeHuman versiunea 1.1.1.
 
 MakeHuman pune la dispozitie un humanoid care poate fi transformat fie in barbat sau femeie. Ca apoi sa il particularizezi mai mult ajutandu-ne de varsta, inaltime, culoarea pielii, forma fetei si forma corpului.
 
@@ -367,278 +354,246 @@ MakeHuman pune la dispozitie un humanoid care poate fi transformat fie in barbat
   \label{figure_1:picture_11}
 \end{figure}
 
-Ajustarea formei corporale este data de proportia intre picioare si abdomen, maini si abdomen, precum si particulatizarea dimensiunii uschiilor pectorali ai spatelui precum si altii. Un aspect interesant este dat de meniul special pentru maini care poate scala dimensiunea manii, lungimea degetelor, lungeamea podului palmei, diametrul degetelor si distanta intre degete.
+Ajustarea formei corporale este data de proportia intre picioare, maini si abdomen, precum si particulatizarea dimensiunii muschiilor pectorali, ai spatelui precum si altii. Un aspect interesant este dat de meniul special pentru maini care poate scala dimensiunea manii, lungimea degetelor, lungeamea podului palmei, diametrul degetelor si distanta intre degete.
 
-Am decis ca Yuna sa fie o femeie in varsta de 25 de ani cu o inaltime de 180 de centrimetrii. Alte particularitati speciale adaugate sunt: forma fetei care este ovala, muschii pectorali sunt cu putin mai dezvoltati.
+Am decis ca Yuna sa fie o femeie in varsta de 25 de ani cu o inaltime de 180 de centrimetri. Alte particularitati speciale adaugate sunt: forma fetei care este ovala, muschii pectorali sunt cu putin mai dezvoltati.
 
 I-am adaugat dinti si limba pentru a oferi mai multa viata caracterului. Acestea sunt vizibile doar atunci cand aceasta mimeaza cuvinte.
 
-MakeHuman ne ofera posibilitatea de a imbraca caracterul la fel si pentru coafura, forma dintilor, forma sprancenelor, lungimea genelelor. Acestea pot sa fie descarcate de pe de pe site-ul comunitatii formate in jurul acestui proiect Open Source http://www.makehumancommunity.org/
+MakeHuman ne ofera posibilitatea de a imbraca caracterul la fel si pentru coafura, forma dintilor, forma sprancenelor, lungimea genelelor. Acestea pot sa fie descarcate de pe de pe site-ul comunitatii formate in jurul acestui proiect open source http://www.makehumancommunity.org/
 
-Am ales din pachetul default peruca pe care o poarta. Prin intermediul comunitatii online am ales bustiera pantalonii si adidasii acesteia.
+Am ales din pachetul default peruca pe care o poarta, acesta este prins in coada. Prin intermediul comunitatii online am ales de asemenea bustiera, pantalonii si adidasii purtati de Yuna.
 
-Cel mai important lucru care ne ajuta la animatii este ca alegem tipul de rig pe care il vom folosi pentru animatii. Am setat ca ea sa aiba scheletul default astfel fiind o proportie buna intre calitatea animatiilor precum si memoria folosita in crearea acestor animmatii.
+Cel mai important lucru care ne ajuta la animatii este ca alegem tipul de rig pe care il vom folosi pentru animatii. MakeHuman pune la dispozitie cinci modele de schelet. Eu am setat ca ea sa aiba scheletul default astfel proportia o sa fie buna intre calitatea animatiilor precum si memoria folosita in crearea acestor animmatii.
 
-\begin{figure}[th]
-\centering
-\includegraphics[width=0.45\columnwidth]{modele_existente/MakeHuman_Skeleton.png}
-  \caption[Scheletul avatarului]{Scheletul avatarului\protect\footnotemark}
-  \label{figure_1:picture_12}
-\end{figure}
-
-Un alt aspect tehnic foarte important pe plan tehnic este densitatea mesh-ei de pe caracter.
-
+Un alt aspect tehnic foarte important este densitatea mesh-ei de pe caracter care variaza de la cel mai simplu la cel mai complex si sunt definite atat pentru caractere masculine si feminine.
 
 \begin{figure}[th]
 \centering
-\includegraphics[width=0.45\columnwidth]{modele_existente/MakeHuman_meshDensity.png}
+\includegraphics[width=0.6\columnwidth]{modele_existente/MakeHuman_meshDensity.png}
   \caption[Densitatea mesh-ei]{Densitatea mesh-ei\protect\footnotemark}
   \label{figure_1:picture_12}
 \end{figure}
 
+%%
+%%  Scheletul
+%%
+\section{Scheletul}
+Scheletul unui caracter este format dintr-o organizare ierarhica a oaselor pentru a se simula cat mai bine miscarile omenesti.
 
-\todo[inline, color=blue!40]{}
+Scheletul este mandatoriu pentru crearea animatiilor pentru caractere tridimensionale. Aceste avatare sunt foarte folosite in jocurile video si in crearea filmelor.
 
+Oasele digitale sunt organizate in relatie parinte-copil. Un exemplu in acest sens este miscarea umarului care va determina implicit miscarea bratului si al palmei.
 
-\section{Schelet}
-Dupa cum am vorbit si in sectiunea anterioara, MakeHuman ne ofera posibilitatea de a aduga un schelet 
+Cu cat scheletul este format din mai multe oase cu atat se pot crea miscari mai detaliate, dar un dezavantaj este puterea necesara pentru randarea acestor animatii ceea ce duce la o gama foarte variata de schelete.
 
-In cazul Yunei scheletul acesteia este compus din:
-\begin{itemize}
-    \item sold - coloana - piept - umeri - umar - brat - antebrat - palma - degete
+Exista o multitudine de forme de organizare al oaselor, dar caracterele care au acelasi schelet pot impartii animatii care au la baza scheletul respectiv.
+
+Dupa cum am mentionat si in subcapitolul precedent, MakeHuman ne ofera posibilitatea de a aduga un schelet. Alegand scheletul inplicit vom avea ca elementul central al scheletului soldul. Yuna are scheletulul format de urmatoarele oase, avand aceasta ierarhie:
+
+\begin{itemize}[noitemsep,topsep=0pt]
+    \item sold - coloana - piept - umar - brat - antebrat - palma - degete
     \item sold - coloana - piept - gat - cap - fata
     \item sold - femur - gamba - picior
 \end{itemize}
 
-Sceletul este utilizat pentru a pune restrictii pentru miscarea oaselor.
-
-Pentru ca animatia sa fie implementata pe diferite caractere trebuie sa se foloseasca un schelet omenesc simplist. 
-
-
 \begin{figure}[th]
 \centering
-\includegraphics[width=0.45\columnwidth]{modele_existente/MakeHuman_Skeleton.png}
+\includegraphics[width=0.6\columnwidth]{modele_existente/MakeHuman_Skeleton.png}
   \caption[Scheletul]{Scheletul\protect\footnotemark}
   \label{figure_1:picture_10}
 \end{figure}
-\footnotetext{© https://docs.unity3d.com/Manual/UsingHumanoidChars.html}
 
 
-
+%%
+%%  Animatii - Blender
+%%
 \section{Animatii - Blender}
-Animatiile sunt folosite pentru aducerea la viata a unui obiect prin intermediul miscarilor fiind constituit dintr-o insiruire de frame-uri de-a lungul unei cuante de timp. 
 
-Cel mai important in cadrul unei animatii este humanoidul. Acesta trebuie sa contina obligatoriu:
+Animatiile sunt folosite pentru aducerea la viata al obiectelor prin intermediul miscarilor fiind constituit dintr-o insiruire de cadrane de-a lungul unei cuante de timp. 
+
+Animatiile pot fi create cu ajutorul diferitelor programe precum Blender, Maya ca apoi sa fie exporate in format FBX. De asemenea, este posibil sa se creeze in Unity, dar este mai complicat si nu este recomandat. Eu am ales sa folosesc Blender deoarece in al treilea an al facultatii l-am folosit pentru a realiza o tema la cursul de elemente de grafica pe calculator.
+
+Cel mai important in cadrul unei animatii este avatarul. In cazul nostru, acest humanoid trebuie sa aiba:
 \begin{itemize}
-    \item polygonal mesh
-    \item bone structure
-    \item skinned for skeleton 
+    \item structura oaselor
+    \item mesh-ul
+    \item maparea pe scheletului caracterului
 \end{itemize}
 
-Pentru crearea unei animatii se creaza obiectul si il pozitioneaza in key frames care contureaza cele mai importante miscari. Ca pe urma computerul sa genereze cadrele dintre aceste frame-uri.
+Criteriile mentionate mai sus au fost indeplinite pentru antrenoarea virtuala, Yuna, cand am creat avatarul folosind MakeHuman. Acest avatar a fost exportat in format .MHX2 - MakeHuman eXchange format 2 care contine informatii mai importante despre mesh, materiale si scheletele suportate de MakeHuman. Acest format este dedicat transformatii caracterului din MakeHuman in Blender format
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.3\columnwidth]{modele_existente/Blender_Animation1.png}
+  \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+Pentru crearea exercitiilor am setat ca picioarele sa foloseasca Forward Kinematics pentru ca oasele sa fie ajustate.
+
+Pentru crearea animatiilor tridimensionale, Blender ne ajuta in crearea acestora prin interpolarea a 2 cadre extreme. Cadrele cheie trebuie realizate de cei care vor sa creeze animatia. KeyFrame-urile sunt markere in timp care memoreaza coordonatele humanoidului. Frame-urile cheie reprezinta inceputul respectiv starsitul unor miscari line.
+
+Pentru genoflexiuni a fost necesar sa creez doar trei cadrane cheie. Am decis ca animatia sa aiba 31 de cadre. In primul frame o avem pe Yuna in pozitia initiala (Fig. 12). Urmatorul frame este la 16 (Fig. 13) unde o surprinde pe Yuna la mijlocul exercitului; acest cadru cheie este important deoarece incepand cu acest cadru aceasta isi schimba directia. Pentru a oferi iluzia de ciclicitate al exercitiului ultimul frame este copia primului frame si acesta este pozitionata in cadrul 32 (Fig. 12). 
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.3\columnwidth]{modele_existente/Blender_squatsFrame1.png}
+  \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.3\columnwidth]{modele_existente/Blender_squatsFrame16.png}
+  \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
 
 % https://entertainment.howstuffworks.com/computer-animation1.htm
 
-Pentru a se simula fizica din spatele unui caracter cu aspect uman trebuie ca acesta sa fie format din suprafata caracterului (pielea) si un set de oase interconectate ierarhic (scheletul).
+In momentul in care creem cadrele cheie totul este in spatiul normal de transformare. Aceste date sunt transformate in spatiul oaselor ceea ce restrictioneaza miscarile. 
 
+In acest sens, osul central poate atat translata cat si roti pe cele trei axe tot arborele creat de oase. 
 
-Initial avem datele animatiei in transform space in care putem roti si apoi aceste date se vor translata in spatiul oaselor.
+Nodurile care au parinte si au si copii au restrictia de a se roti. Oasele care fac parte din ultima categorie nu se pot translata deoarece este restrictionat de celelalte oase, atat parinte cat si copii. 
 
-Pentru a crea miscarile unui avatar trebuie sa translatam animation data in ceea ce se numeste spatiul muscular (interiorul corpului).
+Ultimul tip este format din oasele care constituie frunze din structura ierarhica a oaselor si acestea fiind restrictionate la un capat nu se pot translata singura mutare posibila fiind rotatia.
 
-La baza animatiile pot fi create cu ajutorul:
+Dupa ce s-au capturat frame-urile cheie trebuie sa "coacem" animatia. Prin acest lucru se intelege consolidarea animatiilor din sistemul nostru intr-o forma mai simplificata si permanenata. 
 
-\begin{itemize}
-	\item motion capture (majoritatea fiind create cu ajurorul acesteia)
-	\item key frame
-	\item biblioteci care pot fi gasite online pe diferite pagini web sau in asseturi
-\end{itemize}
+Dupa cum se poate sesiza, animatia are o multime de date care trebuie memorate precum: scheletul, mesh-ul precum si multitudinea de frame-uri fie definite prin cadre cheie fie cele determinate prin interpolarea a doua cadrane cheie.
 
-Simple datafile stocheaza miscarile caracterului in sceen space precm si in transform space.
-
-Unele animation clips contin caracterul iar altele nu contin caracterul.
-
-Animations clips pot fi 
-\begin{itemize}
-    \item generice cu extensia FBX
-    \item prepraiety din MAX sau Maya
-\end{itemize}
-
-Animatiile pot fi create in Unity cu ajutorul ferestrei de animatie. Pentru caractere umane este dificil si nu se recomanda.
-
-
-\section{blender - Creating animations}
-\todo[inline, color=red!40]{https://docs.blender.org/manual/en/latest/animation/index.html}
-KeyFrame-urile sunt niste markere in timp care memoreaza coordonatele obiectului.
-
-Animatiile sunt create din keyframe-uri, iar intre cadrele dintre aceste frame-uri sunt interpolari ale keyframe-urilor.
-
-Pentru a oferi iluzia de repetare al miscarilor am memorat la frame-ul end+1 cadrul din primul frame. Dupa ce am terminat animatia i-am dat bake pentru a se memora si frame-urile dintre keyframe-urile principale.
-
-Pentru ca animatiile sa fie 
-
-
-\section{motion capture}
-Crearea animatiilor
-
-Pentru capturarea animatiilor am folosit softwar-ul Ni Mate care este un plugin pentru blender care translateza imaginiile captate de kinect in blender.
-
-Mai multe detalii in link-ul comentat:
-% https://www.youtube.com/watch?v=1UPZtS5LVvw&t=327s&fbclid=IwAR3uzhz0WTNn51EMM7O_yH6eD8aiH2hXjTJxPmQoFCYaQKqOVIcHqJG3D3I
-
+Blender ne ofera posibilitatea de a coace ceea ce transforma cadranele provenite din interpolare cu cadrane cheie, astfel eliminam diferite dependinte. De asemenea, aceasta actiune previne dezintegrarea unor date. Cand am exportat-o pe Yuna am ales ca animatiile sa fie coapte la salvarea fisierului fbx.
 
 %%
-%%  Detalii de implementare
+%%  Sala de fitness
 %%
-\chapter{solutii de pe piata}
-\todo[inline, color=red!40]{Ce soluții similare există pe piață? Care sunt limitările lor / pentru ce cazuri de utilizare sau pentru ce tip de clienți produsele existente pe piață nu răspund cerințelor? Care sunt indicatorii pe baza cărora sunt evaluate aceste produse, de către potențiali clienți, și unde sunt lipsurile/ care este oportunitatea generată de lipsurile acestea?}
+\section{Sala de fitness}
 
+Am ales sa aleg game engine-ul Unity pentru createa spatiul de interactiune intre avatarul antrenoarei virtuale, Yuna, si utilizatorul aflat in perioada de recuperare sau pentru cei care vor sa isi mentina conditia fizica.
 
-\ambele În încheierea acestui capitol se dorește descrierea tehnologiilor folosite în lucrare, cu alternative și cu argumente convingătoare calitative și cantitative.  
-
-Criterii pentru calificativul \textit{Ne\textit{Satisfăcător}}: 
+Sala de fitness contine:
 \begin{itemize}
-	\item \dezvoltare Sunt analizate superficial câteva produse de pe piață; 
-	\item \ambele Sunt descrise tehnologiile folosite în lucrare. 
+    \item o priveliste cu un lac
+    \item pereti, perestre si tavan
+    \item mingii gimnastice
+    \item saltele de gimnastica
+    \item haltere de diferite dimensiuni
+    \item boxe
+    \item antrenoarea virtuala
+    \item corpuri de iluminat
+    \item banca
 \end{itemize}
 
-Criterii pentru calificativul \textit{Satisfăcător}:
-\begin{itemize}
-	\item \dezvoltare Există un interviu, un client, analiza cerințelor este elaborată pe baza interviului.
-	\item \ambele Sunt descrise câteva tehnologii alternative pentru fiecare din tehnologiile folosite în lucrare. Există o argumentare referitoare la alegere.
-\end{itemize}
+\begin{figure}[th]
+\centering
+\includegraphics[width=1\columnwidth]{modele_existente/Unity_fitnessRoom.png} \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
 
-Criterii pentru calificativul \textit{Bine}:
-\begin{itemize}
-	\item \dezvoltare Proces iterativ pe baza unor interviuri cu mai mulți clienți, dezvoltare MVP, reevaluare cerințe;
-	\item \ambele Sunt descrise tehnologii alternative. Sunt analizate cantitativ și calitativ, folosite benchmarkuri și teste efectuate de student. Analiza este rezumată prin tabele și grafice.
-\end{itemize}
+Pentru crearea spatiului am ales sa folosesc asseturi aflate pe Unity store. Am ales o casa din care am ales back-ground-ul care este format dintr-un teren si un lac.
 
+\begin{figure}[th]
+\centering
+\includegraphics[width=1\columnwidth]{modele_existente/Unity_view.png}  \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+Pentru a crea camera am folosit cuburi pe care le-am redimensionat si pe care am adaugat o  textura gasita in asset store-ul oferit de Unity.
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=1\columnwidth]{modele_existente/Unity_walls.png} \caption[Pereti]{Pereti\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+Ferestrele sunt cele gasite in pachetul care ofera mediul exteriul. Ferestrele permit trecerea luminii generate de soare
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.33\columnwidth]{modele_existente/Unity_window.png} \caption[Ferestre]{Ferestre\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+Pentru mingiile gimnastice am creat sfere de diferite dimensiuni peste care am adaugat texturi care arata ca textura mingiilor din realitate
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.6\columnwidth]{modele_existente/Unity_fitnessBalls.png} \caption[Mingii de gimnastica]{Mingii de gimnastica\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+\newpage
+Saltele gimnastice au fost create in acelasi moduri ca mingiile gimastice. Am creat box-uri pe care le-am redimensionat. Peste acest meshe am adaugat texturi din acelasi pachet din care am luat texturile pentru mingi, pereti, tavan si podea.
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.9\columnwidth]{modele_existente/Unity_saltele.png} \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+\newpage
+
+Am vrut sa simulez un mediu cat mai aproape de o sala de fitness de aceea am adaugat haltere care au fost gasit in asset store. Dupa cum se poate observa haltere au greutati diferite
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.6\columnwidth]{modele_existente/Unity_haltere.png} \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+Pentru a crea un mediu cat mai satisfacator si prielnic pentru antrenamete am adaugat boxe care au fost gasite in asset store.% In sectiuniea viitoare voi explica mai multe detalii legate de fundalul sonor.
+
+\begin{figure}[th]
+\centering
+\includegraphics[width=0.6\columnwidth]{modele_existente/Unity_boxe.png} \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
+
+%\todo[inline, color=blue!40]{}
+
+%\begin{itemize}
+%    \item antrenoarea virtuala
+%    \item corpuri de iluminat
+%    \item banca
+%\end{itemize}
+
+\newpage
 
 %%
-%%  Detalii de implementare
+%%  Sala de fitness
 %%
-\chapter{Soluția Propusă}
-\todo[inline, color=red!40]{Capitolul conține o privire de ansamblu a soluției ce rezolvă problema, prin prezentarea structurii / arhitecturii acesteia. În funcție de tipul lucrării acest capitol poate conține diagrame (clase, distribuție, workflow, entitate-relație), demonstrații de corectitudine pentru algoritmii propuși de autor, abordări teoretice (modelare matematică), structura hardware, arhitectura aplicației.}
+\section{Animatiile in modul de joc}
 
+Pentru a crea animatiile din modul de joc a fost necesar sa creez un crontroller de animatii pe care l-am pus peste mesh, ceea ce a generat miscarile Yunei in game play.
 
-Criterii pentru calificativul \textit{Ne\textit{Satisfăcător}}: 
-\begin{itemize}
-	\item	Descriere în limbaj natural.
-\end{itemize}
+In momentul acual am creat animatia pentru un exercitiu de ridicare ape rand al bratelor.
 
-Criterii pentru calificativul \textit{Satisfăcător}: 
-\begin{itemize}
-	\item	Descriere + diagrame de baze de date, workflow, clase, algoritmi. 
-\end{itemize}
-
-Criterii pentru calificativul \textit{Bine}: 
-\begin{itemize}
-	\item 	Descriere + diagrame de baze de date, workflow, clase, algoritmi + descrierea unui proces prin care s-a realizat arhitectura/structura soluției.
-\end{itemize}
-
-\section{Indicații formatare formule}
-Formulele matematice utilizate în document vor fi centrate în pagină și numerotate. 
-
-\begin{equation}
-(x+a)^n = \sum_{k=0}^{n}\left(\begin{array}{c}n\\k\\\end{array}\right)x^ka^{n-k}
-\end{equation}
-
-\begin{equation}
-f(x) = a_0 + \sum_{n=1}^{\infty}\left(a_n \cos\frac{n\pi x}{L} + b_n\sin\frac{n\pi x}{L}\right)
-\end{equation}
-
+\begin{figure}[th]
+\centering
+\includegraphics[width=1\columnwidth]{modele_existente/Unity_animationController.png} \caption[Scheletul]{Scheletul\protect\footnotemark}
+  \label{figure_1:picture_10}
+\end{figure}
 
 %%
-%%  Detalii de implementare
+%%  Evaluare
 %%
-\chapter{Detalii de implementare}
-În plus fata de capitolul precedent acesta conține elemente specifice ale rezolvării problemei care au presupus dificultăți deosebite din punct de vedere tehnic. Pot fi incluse configurații, secvențe de cod, pseudo-cod, implementări ale unor algoritmi, analize ale unor date, scripturi de testare. De asemenea, poate fi detaliat modul în care au fost utilizate tehnologiile introduse in capitolul 3.
+\chapter{Urmatorii pasi}
 
-
-Criterii pentru calificativul \textit{Ne\textit{Satisfăcător}}: 
-\begin{itemize}
-	\item	Sunt prezentate pe scurt scheme și pseudo-cod.
-\end{itemize}
-Criterii pentru calificativul \textit{Satisfăcător}: 
-\begin{itemize}
-	\item	Descriere sumara a implementării, prezentarea unor secvențe nerelevante de cod, scheme, etc. 
-\end{itemize}
-Criterii pentru calificativul \textit{Bine}: 
-\begin{itemize}
-	\item	Descrierea detaliată a algoritmilor/structurilor utilizați; Prezentarea etapizată a dezvoltării, inclusiv cu dificultăți de implementare întâmpinate, soluții descoperite; (dacă este cazul) demonstrarea corectitudinii algoritmilor utilizați. 
-\end{itemize}
-
-\section{Indicații formatare tabele}
-Se recomandă utilizarea tabelelor de forma celui de mai jos.  Font size :  9. 
-Orice tabel prezent în teză va fi referit în text; exemplu: a se vedea Tabel~\ref{tab:criterii}.
-
-\begin{table}[th]\small\linespread{1}
-\caption{Sumarizare criterii}
-\label{tab:criterii}
-\begin{tabular}{l >{\raggedright\arraybackslash}p{8cm} >{\raggedright\arraybackslash}p{4cm}}
-\textbf{Calificativ} & \textbf{Criteriu} & \textbf{Observații} \\\hline
-\textbf{Nesatisfacator} & Sunt prezentate pe scurt scheme și pseudo-cod & \\\hline
-\textbf{Satisfacator} &Descriere sumara a implementării, prezentarea unor secvențe nerelevante de cod, scheme, etc.& \\
-\hline
-\textbf{\textit{Bine}} &Descrierea detaliată a algoritmilor/structurilor utilizați; Prezentarea etapizată a dezvoltării, inclusiv cu dificultăți de implementare întâmpinate, soluții descoperite; (dacă este cazul) demonstrarea corectitudinii algoritmilor utilizați. & Pot fi incluse configurații, secvente de cod, pseudo-cod, implementări ale unor algoritmi, analize ale unor date, scripturi de testare. \\
-\hline
-\end{tabular}
-\end{table}
-
-
-\chapter{Evaluare}
-Acest capitol trebuie să răspundă, în principiu, la 2 întrebări și să se încheie cu o discuție a rezultatelor obținute. Cele doua întrebări la care trebuie sa se răspundă sunt:
+In perioada urmatoare imi propun sa folosesc 
 \begin{enumerate}
-	\item  \textbf{Merge corect?} (Conform specificațiilor extrase în capitolul 2); 
-Evaluarea dacă merge corect se face pe baza cerințelor identificate în capitolele anterioare. 
-
-	\item Cât de \textit{Bine} merge / cum se compară cu soluțiile existente? (pe baza unor metrici clare). 
-Evaluarea cât de \textit{Bine} merge trebuie să fie bazată pe procente, timpi, cantitate, numere, \textbf{comparativ cu soluțiile prezentate în capitolul 3}. Poate fi vorba de performanță, overhead, resurse consumate, scalabilitate etc. 
+    \item Kinect-ul pentru a captura miscarile userului. 
+    \item Adaugarea mai multor controlere de animatiile care au deja in animatii realizare in blender
+    \item adaugarea unei melodii de fundal
+    \item crearea meniului
 \end{enumerate}
 
-În realizarea discuției, se vor utiliza tabele cu procente, rezultate numerice și grafice. În mod obișnuit, aici se fac comparații și teste comparative cu alte proiecte similare (dacă există) și se extrag puncte tari și puncte slabe. Se ține cont de avantajele menționate și se demonstrează viabilitatea abordării / aplicației, de dorit prin comparație cu alte abordări (dacă acest lucru este posibil). Cuvântul cheie la evaluare este ``metrică'': trebuie să aveți noțiuni măsurabile și cuantificabile. În cadrul procesului de evaluare, explicați datele, tabelele și graficele pe care le prezentați și insistați pe relevanța lor, în următorul stil: ``este de preferat ... deoarece …''; explicați cititorului nu doar datele ci și semnificația lor și cum sunt acestea interpretate. Din această interpretare trebuie să rezulte poziționarea proiectului vostru printre alternativele existente, precum și cum poate fi acesta îmbunătățit în continuare.
-
-Criterii pentru calificativul \textit{Ne\textit{Satisfăcător}}: 
-\begin{itemize}
-	\item Aplicația este testată dar rulează pe calculatorul studentului, nu există posibilități de testare, nu a fost validată cu clienți / utilizatori;
-	\item Nu au fost realizate comparații cu alte sisteme similare.
-\end{itemize}
-
-Criterii pentru calificativul \textit{Satisfăcător}: 
-\begin{itemize}
-	\item \dezvoltare  Există teste unitare și de integrare, există o strategie de punere în funcțiune (deployment), există validare minimală cu clienții / utilizatorii.
-	\item \ambele Discuție minimală asupra relevanței rezultatelor prezentate, comparație minimală cu alte sisteme similare.
-\end{itemize}
-
-Criterii pentru calificativul \textit{Bine}: 
-\begin{itemize}
-	\item \dezvoltare Teste unitare și de integrare, instrumente de punere in funcțiune (deployment) utilizate și care arată lucru constant de-a lungul semestrului, lucrare validată cu clienții / utilizatorii, produs în producție.
-	\item \ambele Discuție cu prezentarea calitativă și cantitativă a rezultatelor, precum și a relevanței acestor rezultate printr-o comparație complexă cu alte sisteme similare.
-\end{itemize}
-
-\chapter{Concluzii}
-În acest capitol este sumarizat întreg proiectul, de la obiective, la implementare, si la relevanta rezultatelor obținute. În finalul capitolului poate exista o subsecțiune de ``Dezvoltări ulterioare''.
-
-Criterii pentru calificativul \textit{Ne\textit{Satisfăcător}}: 
-\begin{itemize}
-	\item	Concluziile nu sunt corelate cu conținutul lucrării;
-\end{itemize}
-
-Criterii pentru calificativul \textit{Satisfăcător}: 
-\begin{itemize}
-	\item	Concluziile sunt corelate cu conținutul lucrării, însă nu se oferă o imagine asupra calității și relevantei rezultatelor obținute;
-\end{itemize}
-
-Criterii pentru calificativul \textit{Bine}: 
-\begin{itemize}
-	\item	Concluziile sunt corelate cu conținutul lucrării, și se oferă o imagine precisa asupra relevantei și calității rezultatelor obținute în cadrul proiectului. 
-\end{itemize}
-
 
 %%
-%%  Detalii de implementare
+%%  Biografie
 %%
+
 \chapter*{Bibliografie}\addcontentsline{toc}{chapter}{Bibliografie}  
 % * <marios.choudary@gmail.com> 2018-02-28T12:07:48.730Z:
 % 
@@ -648,90 +603,19 @@ Criterii pentru calificativul \textit{Bine}:
 % ^.
 
 \begin{itemize}
-	\item 	NU utilizați referințe la Wikipedia sau alte surse fără autor asumat.
-	\item 	Pentru referințe la articole relevante accesibile în web (descrise prin URL) se va nota la bibliografie și data accesării.
-	\item 	Mai multe detalii despre citarea referințelor din internet se pot regăsi la:
-	\begin{itemize}
-		\item	\url{http://www.writinghelp-central.com/apa-citation-internet.html}
-		\item	\url{http://www.webliminal.com/search/search-web13.html}
-	\end{itemize}
-	\item 	Note de subsol se utilizează dacă referiți un link mai puțin semnificativ o singură dată; Dacă nota este citată de mai multe ori, atunci utilizați o referință bibliografică.
-	\item 	Dacă o imagine este introdusă în text și nu este realizată de către autorul lucrării, trebuie citată sursa ei (ca notă de subsol sau referință - este de preferat utilizarea unei note de subsol).
-	\item 	Referințele se pun direct legate de text (de exemplu ``KVM [1] uses'', ``as stated by Popescu and Ionescu [12]'', etc.). Nu este recomandat să folosiți formulări de tipul ``[1] uses'', ``as stated in [12]'', ``as described in [11]'' etc..
-	\item 	Afirmațiile de forma ``are numerous'', ``have grown exponentially'', ``are among the most used'', ``are an important topic'' trebuie să fie acoperite cu citări, date concrete si analize comparative.
-	\begin{itemize}
-		\item	Mai ales în capitolele de introducere, ``state of the art'', ``related work'' sau ``background'' trebuie să vă argumentați afirmațiile prin citări. Fiți autocritici și gândiți-vă dacă afirmațiile au nevoie de citări, chiar și cele pe care le considerați evidente.
-		\item	Cea mai mare parte dintre citări vor fi în capitolele de introducere ``state of the art'', ``related work'' sau ``background''.
-	\end{itemize}
-	\item 	Toate intrările bibliografice trebuie citate în text. Nu le adăugați pur și simplu la final.
-	\item 	Nu copiați sau traduceți niciodată din surse de informație de orice tip (online, offline, cărți, etc.). Dacă totuși doriți să oferiți, prin excepție, un citat celebru - de maxim 1 frază- utilizați ghilimele și evident menționați sursa. .
-	\item 	Dacă reformulați idei sau creați un paragraf rezumat al unor idei folosind cuvintele voastre, precizați cu citare (referință bibliografică) sau cu notă de subsol sursa sau sursele de unde ați preluat ideile.
+	\item 	https://blender.stackexchange.com/questions/24633/what-is-the-difference-between-ik-and-fk-in-animation-on-blender
+	\item 	https://docs.blender.org/manual/en/latest/index.html
+	\item 	http://makehumancommunity.org
+	\item 	https://docs.unity3d.com/Manual/UsingHumanoidChars.html
+	\item   https://www.moddb.com/groups/anime/news/ubisoft-bets-wide
+	\item   http://www.impulsegamer.com/360zumbafitnesscore.html
+    \item   https://www.amazon.com/Biggest-Loser-Ultimate-Workout-Xbox-360/dp/B003S2SQFS5c
+    \item   https://www.videogamesblogger.com/2010/11/16/ea-sports-active-2-walkthrough-video-guide-xbox-360-ps3-wii.htm
+    \item   https://docs.blender.org/manual/en/latest/animation/index.html
+    \item   https://cgcookie.com/articles/big-idea-baking
+    \item   https://docs.unity3d.com/Manual/class-AnimatorController.html
+    \item   https://www.microsoft.com/en-us/research/blog/stroke-recovery-gets-a-boost-from-kinect/
 \end{itemize}
 
-Trebuie respectat un singur standard de trimiteri bibliografice (citare), dintre următoarele alternative:
-\begin{itemize}
-	\item APA (\url{http://pitt.libguides.com/c.php?g=12108\&p=64730})
-	\item IEEE (\url{https://ieee-dataport.org/sites/default/files/analysis/27/IEEE\%20Citation\%20Guidelines.pdf}) 
-	\item Harvard (\url{https://libweb.anglia.ac.uk/referencing/harvard.htm})
-	\item Cu numerotarea referințelor în ordine alfabetică sau în ordinea apariției în text (de exemplu, stilul cu numere folosit de unele publicații ACM - \url{https://www.acm.org/publications/authors/reference-formatting}) 
-\end{itemize}
 
-În Latex este foarte ușor să folosiți referințe într-un mod corect și unitar, fie prin adăugarea unei secțiuni
-\verb!\begin{thebibliography}!
-(vezi la sfârșitul acestei secțiuni), fie printr-un fișier separat de tip bib, folosind comanda
-\verb!\bibliography{}!,
-așa cum procedăm mai jos prin folosirea fișierului ``bibliography.bib''. În orice caz, în Latex va trebui să folosiți comanda
-\verb!\cite{}!
-pentru a adăuga referințe, iar această comandă trebuie folosită direct în text, acolo unde vreți sa apară citația, ca în exemplele următoare:
-\begin{itemize}
-	\item Articol jurnal: ~\cite{article};
-	\item Articol conferință:~\cite{proc};
-	\item Carte: ~\cite{book};
-	\item Weblink: ~\cite{silva};
-\end{itemize}
-
-\textbf{Important}: în această secțiune de obicei apar doar intrările bibliografice (adică doar listarea referințelor). Citarea lor prin comanda cite și explicații legate de ele trebuie facute în secțiunile anterioare. Citarea de mai sus a fost facută aici doar pentru exemplificare.
-
-% Asa se specifica folosirea unui fisier cu referinte bibliografice:
-\bibliographystyle{plain}
-\bibliography{bibliography}
-
-%% O alta varianta ar fi fost includerea de articole direct in acest fisier
-%% in felul urmator:
-%% \begin{thebibliography}{ABC}
-%%
-%% \bibitem{article}
-%%  H. Baali, H. Djelouat, A. Amira and F. Bensaali,
-%%  ``Empowering Technology Enabled Care Using IoT and Smart Devices:
-%   A Review''. In: IEEE Sensors Journal, vol. 322 (10), pp. 891--921, 1905.
-%%
-%% (more \bibitem items here...)
-%%
-%% \end{thebibliography}
-
-%% Daca vreti ca o sectiune sa inceapa pe o pagina noua, puteti forta acest lucru cu comanda "\newpage", ca mai jos:
-
-%\newpage
-
-\chapter*{Anexe}\addcontentsline{toc}{chapter}{Anexe}
-
-Anexele sunt opționale.
-Ce poate intra în anexe:
-\begin{itemize}
-\item	Exemplu de fișier de configurare sau compilare;
-\item	Un tabel mai mare de o jumătate pagină;
-\item	O figura mai mare mai mare de jumătate pagină;
-\item	O secvență de cod sursa mai mare de jumătate pagină;
-\item	Un set de capturi de ecran (``screenshot''-uri);
-\item	Un exemplu de rulare a unor comenzi plus rezultatul (``output''-ul) acestora;
-\item 	În anexe intră lucruri care ocupă mai mult de o pagină ce ar întrerupe firul natural de parcurgere al textului.
-\end{itemize}
-
-\begin{appendices}
-
-\chapter{Extrase de cod} % Introduce o nouă anexă
-\ldots
-
-
-\end{appendices}
 \end{document}
