@@ -2,11 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using Kinect = Windows.Kinect;
+using System;
 
 public class BodySourceView : MonoBehaviour 
 {
     public Material BoneMaterial;
     public GameObject BodySourceManager;
+    public YunaManager Yuna;
+    public List<Vector3> CalculatedRotationsList = new List<Vector3>();
+    public Vector3[] BoneRotations;
+    public float timeToSearch = 15.0f;
     
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
@@ -94,6 +99,7 @@ public class BodySourceView : MonoBehaviour
             {
                 continue;
             }
+
             
             if(body.IsTracked)
             {
@@ -110,6 +116,8 @@ public class BodySourceView : MonoBehaviour
     private GameObject CreateBodyObject(ulong id)
     {
         GameObject body = new GameObject("Body:" + id);
+       // body.transform.position = Yuna.transform.position;
+        //body.tag = "KinectBody";
         
         for (Kinect.JointType jt = Kinect.JointType.SpineBase; jt <= Kinect.JointType.ThumbRight; jt++)
         {
@@ -122,6 +130,7 @@ public class BodySourceView : MonoBehaviour
             
             jointObj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             jointObj.name = jt.ToString();
+            
             jointObj.transform.parent = body.transform;
         }
         
@@ -130,6 +139,8 @@ public class BodySourceView : MonoBehaviour
     
     private void RefreshBodyObject(Kinect.Body body, GameObject bodyObject)
     {
+        CalculatedRotationsList.Clear();
+      
         for (Kinect.JointType jt = Kinect.JointType.SpineBase; jt <= Kinect.JointType.ThumbRight; jt++)
         {
             Kinect.Joint sourceJoint = body.Joints[jt];
@@ -139,10 +150,67 @@ public class BodySourceView : MonoBehaviour
             {
                 targetJoint = body.Joints[_BoneMap[jt]];
             }
-            
+
             Transform jointObj = bodyObject.transform.Find(jt.ToString());
             jointObj.localPosition = GetVector3FromJoint(sourceJoint);
-            
+            //Debug.Log("elbow left rotation: " + CalculatedRotation);
+            float w = body.JointOrientations[jt].Orientation.W;
+            float x = body.JointOrientations[jt].Orientation.X;
+            float y = body.JointOrientations[jt].Orientation.Y;
+            float z = body.JointOrientations[jt].Orientation.Z;
+            Vector4 Orientation = new Vector4(x, y, z, w);
+          //  Quaternion Q = new Quaternion(x, y, z, w);
+            double rotX = Pitch(Orientation);
+            double rotY = Yaw(Orientation);
+            double rotZ = Roll(Orientation);
+           
+            Vector3 CalculatedRotation = new Vector3((float)rotX, (float)rotY, (float)rotZ);
+            CalculatedRotationsList.Add(CalculatedRotation);
+            timeToSearch -= Time.deltaTime;
+            if(jt == Kinect.JointType.ShoulderLeft)
+            {
+               // Debug.Log("elbow left rotation: " + Orientation);
+                Vector4 YunaElbowLeft = new Vector4(Yuna.YunaBones[0].transform.rotation.x, Yuna.YunaBones[0].transform.rotation.y, Yuna.YunaBones[0].transform.rotation.z, Yuna.YunaBones[0].transform.rotation.w);
+                float distance = Vector4.Distance(Orientation, YunaElbowLeft );
+                double kinectInverse = Orientation.x * -1;
+                double result = Yuna.YunaBones[0].rotation.x - kinectInverse;
+
+                if(result < 0.2f && timeToSearch < 0 )
+                {
+                    Yuna.Score++;
+                    timeToSearch = 15.0f;
+                }
+                Debug.Log("Kienct rotation x: " + Orientation.x + " Yuna rotation X: " + Yuna.YunaBones[0].transform.rotation.x + " result: " + result);
+                //if (distance <= 1 && timeToSearch < 0 && distance > 0.75f)
+                //{
+                //    Debug.Log("Distance elbow left = " + distance);
+                //    Yuna.Score++;
+                //    timeToSearch = 15.0f;
+                //}
+            }
+
+            if (jt == Kinect.JointType.ShoulderRight)
+            {
+                // Debug.Log("elbow left rotation: " + Orientation);
+                Vector4 YunaElbowRight = new Vector4(Yuna.YunaBones[1].transform.rotation.x, Yuna.YunaBones[1].transform.rotation.y, Yuna.YunaBones[1].transform.rotation.z, Yuna.YunaBones[1].transform.rotation.w);
+                float distance = Vector4.Distance(Orientation, YunaElbowRight);
+
+                double kinectInverse = Orientation.x * -1;
+                double result = (float)Yuna.YunaBones[1].rotation.x - kinectInverse;
+
+                if (result < 0.2f && timeToSearch < 0 )
+                {
+                    Yuna.Score++;
+                    timeToSearch = 15.0f;
+                }
+                //if (distance <= 1 && timeToSearch < 0 )
+                //{
+                //    Debug.Log("Distance elbow right = " + distance);
+                //    Yuna.Score++;
+                //    timeToSearch = 15.0f;
+                //}
+            }
+            Yuna.YunaScoreText.SetText(Yuna.Score.ToString());
             LineRenderer lr = jointObj.GetComponent<LineRenderer>();
             if(targetJoint.HasValue)
             {
@@ -156,7 +224,42 @@ public class BodySourceView : MonoBehaviour
             }
         }
     }
-    
+
+    public static double Pitch(Vector4 quaternion)
+    {
+        double value1 = 2.0 * (quaternion.w * quaternion.x + quaternion.y * quaternion.z);
+        double value2 = 1.0 - 2.0 * (quaternion.x * quaternion.x + quaternion.y * quaternion.y);
+
+        double roll = Math.Atan2(value1, value2);
+
+        return roll * (180.0 / Math.PI);
+    }
+
+    /// <summary>
+    /// Rotates the specified quaternion around the Y axis.
+    public static double Yaw(Vector4 quaternion)
+    {
+        double value = 2.0 * (quaternion.w * quaternion.y - quaternion.z * quaternion.x);
+        value = value > 1.0 ? 1.0 : value;
+        value = value < -1.0 ? -1.0 : value;
+
+        double pitch = Math.Asin(value);
+
+        return pitch * (180.0 / Math.PI);
+    }
+
+    /// <summary>
+    /// Rotates the specified quaternion around the Z axis.
+    public static double Roll(Vector4 quaternion)
+    {
+        double value1 = 2.0 * (quaternion.w * quaternion.z + quaternion.x * quaternion.y);
+        double value2 = 1.0 - 2.0 * (quaternion.y * quaternion.y + quaternion.z * quaternion.z);
+
+        double yaw = Math.Atan2(value1, value2);
+
+        return yaw * (180.0 / Math.PI);
+    }
+
     private static Color GetColorForState(Kinect.TrackingState state)
     {
         switch (state)
