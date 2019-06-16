@@ -12,6 +12,7 @@ public class BodySourceView : MonoBehaviour
     public List<Vector3> CalculatedRotationsList = new List<Vector3>();
     public Vector3[] BoneRotations;
     public float timeToSearch = 15.0f;
+    float timeleft = 30.0f;
     
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
@@ -140,7 +141,13 @@ public class BodySourceView : MonoBehaviour
     private void RefreshBodyObject(Kinect.Body body, GameObject bodyObject)
     {
         CalculatedRotationsList.Clear();
-      
+        timeleft -= Time.deltaTime;
+        Yuna.Timer.SetText(timeleft.ToString());
+        if(timeleft < 0 && !Yuna.gameEnded)
+        {
+            Yuna.ShowEndScreen();
+            Debug.LogError("STOOOOOOOOOOOOOOOOOOOOOOOOP");
+        }
         for (Kinect.JointType jt = Kinect.JointType.SpineBase; jt <= Kinect.JointType.ThumbRight; jt++)
         {
             Kinect.Joint sourceJoint = body.Joints[jt];
@@ -175,7 +182,7 @@ public class BodySourceView : MonoBehaviour
                 double kinectInverse = Orientation.x * -1;
                 double result = Yuna.YunaBones[0].rotation.x - kinectInverse;
 
-                if(result < 0.2f && timeToSearch < 0 )
+                if(result < 0.2f && timeToSearch < 0 && !Yuna.gameEnded )
                 {
                     Yuna.Score++;
                     timeToSearch = 15.0f;
@@ -198,7 +205,7 @@ public class BodySourceView : MonoBehaviour
                 double kinectInverse = Orientation.x * -1;
                 double result = (float)Yuna.YunaBones[1].rotation.x - kinectInverse;
 
-                if (result < 0.2f && timeToSearch < 0 )
+                if (result < 0.2f && timeToSearch < 0 && !Yuna.gameEnded)
                 {
                     Yuna.Score++;
                     timeToSearch = 15.0f;
@@ -210,7 +217,7 @@ public class BodySourceView : MonoBehaviour
                 //    timeToSearch = 15.0f;
                 //}
             }
-            Yuna.YunaScoreText.SetText(Yuna.Score.ToString());
+            Yuna.DebugYunaScoreText.SetText(Yuna.Score.ToString());
             LineRenderer lr = jointObj.GetComponent<LineRenderer>();
             if(targetJoint.HasValue)
             {
