@@ -20,7 +20,10 @@ In Unity I created the fitness room using materials and objects from asset store
 
 I put the avatar in the middle of the room and added a colider from fbx.
 
-TODO to detect the moves of the user using the rotation of the bones and comparing those with rotation of Yuna's bones
+Using Kinect's API, I detected the body of user.
 
-The goal is that Yuna will give stars to the end users, which are copying her moves using kinect.
+I verified if the rotation for user's bones are approximately same as Yunațs.
 
+In 30 seconds, the user must copy the moves of the trainer.
+
+After thos 30 seconds, Yuna will tell how well did you do it.
